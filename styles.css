@@ -8,3 +8,17 @@ html, body{
 h1{
   text-align:center;
 }
+
+.slideshow{
+  width:600px;
+  height:500px;
+  margin:auto;
+}
+.back{
+  float:left;
+  margin-top:240px;
+}
+.forward{
+  float:right;
+  margin-top:240px;
+}
