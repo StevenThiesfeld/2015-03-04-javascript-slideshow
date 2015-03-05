@@ -22,3 +22,7 @@ h1{
   float:right;
   margin-top:240px;
 }
+.image{
+  max-width:500px;
+  display:inline-block;
+}
