@@ -1,9 +1,14 @@
 var currentPosition = 0;
+    
 window.onload = function(){
-  document.getElementById("editForm").addEventListener("submit", editSlide);
-  document.getElementById("showEditButton").addEventListener("click", showForm);
-  document.getElementById("backButton").addEventListener("click", previousSlide);
-  document.getElementById("forwardButton").addEventListener("click", nextSlide);
+  editForm = document.getElementById("editForm"),
+  showEditButton = document.getElementById("showEditButton"),
+  backButton = document.getElementById("backButton"),
+  forwardButton = document.getElementById("forwardButton");
+  editForm.addEventListener("submit", editSlide);
+  showEditButton.addEventListener("click", showForm);
+  backButton.addEventListener("click", previousSlide);
+  forwardButton.addEventListener("click", nextSlide);
   nextSlide()
 }
   
@@ -27,17 +32,17 @@ function previousSlide(){
 }
 
 function showForm(){
-  document.getElementById("editForm").setAttribute("class", "show");
-  document.getElementById("showEditButton").setAttribute("class", "hide");
+  editForm.setAttribute("class", "show");
+  showEditButton.setAttribute("class", "hide");
   document.getElementById("slideshow").setAttribute("class", "hide");
 }
 
-function editSlide(){ 
-  var formElement = document.getElementById("editForm");
+function editSlide(e){ 
+  e.preventDefault()
   var request = new XMLHttpRequest;
   request.open("post", "http://127.0.0.1:4567/edit-slide");
-  request.send(new FormData(formElement));
-  formElement.reset()
+  request.send(new FormData(editForm));
+  editForm.reset()
   request.addEventListener("load", displaySlide, false); 
 }
 
@@ -49,7 +54,7 @@ var displaySlide = function(event){
    document.getElementsByTagName("INPUT")[1].setAttribute("value", slide.title);
    document.getElementsByTagName("TEXTAREA")[0].innerHTML = slide.body;
    document.getElementById("slideId").setAttribute("value", slide.id)
-   document.getElementById("editForm").setAttribute("class", "hide");
-   document.getElementById("showEditButton").setAttribute("class", "show");
+   editForm.setAttribute("class", "hide");
+   showEditButton.setAttribute("class", "show");
    document.getElementById("slideshow").setAttribute("class", "show");
 }
