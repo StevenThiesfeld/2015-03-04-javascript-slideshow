@@ -4,7 +4,7 @@ var imageDir = "images/";
 
 var imageNum = 0;
 
-var currentImage = 0;
+var currentPosition = 1;
 
 var imageArray = [];
 
