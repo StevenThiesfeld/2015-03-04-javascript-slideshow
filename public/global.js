@@ -1,5 +1,7 @@
 var currentPosition = 0;
 
+document.getElementById("editForm").addEventListener("submit", editSlide)
+
 function nextSlide(){
   var formData = new FormData();
   formData.append("currentPosition", currentPosition);
