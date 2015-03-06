@@ -5,13 +5,13 @@
     <input type="hidden" id="slideId" name="id">
     <input type="text" name="title" required><br>
     <textarea name="body" rows="20" cols="65" required></textarea><br>
-    <submit type="submit">Submit Edit</submit>
+    <input type="submit" value="Submit Edit">
   </form>
 </div>
-<button id="showEditButton" onclick="showForm()">Edit Slide</button>
+<button id="showEditButton">Edit Slide</button>
 <div id="slideshow">
   <div class="back button">  
-    <button onclick="previousSlide()">Back</button>
+    <button id="backButton">Back</button>
   </div>
   <!--back button -->
   <div class="slide">
@@ -20,7 +20,7 @@
   </div>
   <!--slide -->
   <div class="forward button">
-    <button onclick="nextSlide()">Next</button>
+    <button id="forwardButton">Next</button>
   </div>
   <!--forward button -->
 </div>

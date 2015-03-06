@@ -1,7 +1,12 @@
 var currentPosition = 0;
-
-document.getElementById("editForm").addEventListener("submit", editSlide)
-
+window.onload = function(){
+  document.getElementById("editForm").addEventListener("submit", editSlide);
+  document.getElementById("showEditButton").addEventListener("click", showForm);
+  document.getElementById("backButton").addEventListener("click", previousSlide);
+  document.getElementById("forwardButton").addEventListener("click", nextSlide);
+  nextSlide()
+}
+  
 function nextSlide(){
   var formData = new FormData();
   formData.append("currentPosition", currentPosition);
@@ -10,6 +15,7 @@ function nextSlide(){
   request.send(formData);
   request.addEventListener("load", displaySlide, false);
 }
+
 
 function previousSlide(){
   var formData = new FormData();
