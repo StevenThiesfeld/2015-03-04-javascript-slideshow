@@ -1,30 +1,47 @@
-var randomDisplay = 0;
+var currentPosition = 0;
+var slide
 
-var imageDir = "images/";
-
-var imageNum = 0;
-
-var currentPosition = 1;
-
-var imageArray = [];
-
-var totalImages;
-
-function addImage(imageName){
-  imageArray[imageNum++] = imageDir + imageName;
-  totalImages = imageArray.length
+function nextSlide(){
+  var formData = new FormData();
+  formData.append("currentPosition", currentPosition);
+  var request = new XMLHttpRequest;
+  request.open("post", "http://127.0.0.1:4567/next-slide");
+  request.send(formData);
+  request.addEventListener("load", displaySlide, false);
 }
 
-function nextImage(){
-  currentImage = (currentImage+1) % totalImages;
-  document.getElementById("slide-image").src = imageArray[currentImage] 
+function previousSlide(){
+  var formData = new FormData();
+  formData.append("currentPosition", currentPosition);
+  var request = new XMLHttpRequest;
+  request.open("post", "http://127.0.0.1:4567/previous-slide");
+  request.send(formData);
+  request.addEventListener("load", displaySlide, false);
 }
 
-function previousImage(){
-  currentImage = (currentImage-1) % totalImages;
-  document.getElementById("slide-image").src = imageArray[currentImage] 
+function showForm(){
+  var form = document.createElement("FORM");
+  var title = document.createElement("INPUT");
+  title.setAttribute("type", "text");
+  var body = document.createElement("TEXTAREA");
+  var button = document.createElement("BUTTON");
+  button.innerHTML = "Submit Edit"
+  title.setAttribute("value", slide.title);
+  body.innerHTML = slide.body;
+  form.appendChild(title);
+  form.appendChild(body);
+  form.appendChild(button);
+  document.getElementById("editContainer").appendChild(form);
+  document.getElementById("showEditButton").setAttribute("class", "hide")
 }
 
-addImage("image-0.jpg");
-addImage("image-1.jpg");
-addImage("image-2.jpg");
+function editSlide(){ 
+  
+}
+
+var displaySlide = function(event){
+   slide = JSON.parse(event.target.response);
+   document.getElementById("title").innerHTML = slide.title;
+   document.getElementById("body").innerHTML = slide.body; 
+   currentPosition = slide.position;
+}

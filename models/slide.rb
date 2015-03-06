@@ -10,7 +10,7 @@ class Slide
     @position = options["position"]
   end
   
-  def count_slides
+  def self.count_slides
     DATABASE.execute("SELECT COUNT(*) FROM slides")[0][0]
   end
   
@@ -24,18 +24,26 @@ class Slide
   end
   
   def self.get_next_slide(currentPosition)
-    result = DATABASE.execute("SELECT * FROM slides WHERE position = #{(currentPosition+1) % count_slides}")[0]
+    if currentPosition.to_i != 5
+      result = DATABASE.execute("SELECT * FROM slides WHERE position = #{currentPosition.to_i + 1}")[0]
+    else
+      result = DATABASE.execute("SELECT * FROM slides WHERE position = 1")[0]
+    end
     self.new(result)
   end
   
   def self.get_previous_slide(currentPosition)
-    result = DATABASE.execute("SELECT * FROM slides WHERE position = #{(currentPosition-1) % count_slides}")[0]
+    if currentPosition.to_i != 1
+      result = DATABASE.execute("SELECT * FROM slides WHERE position = #{currentPosition.to_i - 1}")[0]
+    else
+      result = DATABASE.execute("SELECT * FROM slides WHERE position = #{count_slides}")[0]
+    end
     self.new(result)
   end
   
   def insert
     DATABASE.execute("INSERT INTO slides (title, body, position) VALUES 
-    ('#{title}', '#{body}', #{position})")
+    (?, ?, ?", title, body, position)
     @id =  DATABASE.last_insert_row_id
   end
   
