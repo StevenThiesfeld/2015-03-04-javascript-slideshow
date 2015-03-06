@@ -1,20 +1,28 @@
 <h1>Welcome to the Slideshow!</h1>
-<div id="editContainer"></div>
-    <button id="showEditButton" onclick="showForm()">Edit Slide</button>
-    <div class="slideshow">
-      <div class="back button">  
-        <button onclick="previousSlide()">Back</button>
-      </div>
-      <!--back button -->
-      <div class="slide">
-        <h2 id="title"></h2>
-        <p id="body"></p>
-      </div>
-      <!--slide -->
-      <div class="forward button">
-        <button onclick="nextSlide()">Next</button>
-      </div>
-      <!--forward button -->
-    </div>
-    <!--slideshow -->
+<p>The current time is <strong><%= Time.now %></strong></p>
+<div id="editContainer">
+  <form id="editForm" class="hide" action="javascript:void(0)">
+    <input type="hidden" id="slideId" name="id">
+    <input type="text" name="title" required><br>
+    <textarea name="body" rows="20" cols="65" required></textarea><br>
+    <button onclick="editSlide()">Submit Edit</button>
+  </form>
+</div>
+<button id="showEditButton" onclick="showForm()">Edit Slide</button>
+<div id="slideshow">
+  <div class="back button">  
+    <button onclick="previousSlide()">Back</button>
+  </div>
+  <!--back button -->
+  <div class="slide">
+    <h2 id="title"></h2>
+    <p id="body"></p>
+  </div>
+  <!--slide -->
+  <div class="forward button">
+    <button onclick="nextSlide()">Next</button>
+  </div>
+  <!--forward button -->
+</div>
+<!--slideshow -->
     

@@ -20,5 +20,5 @@ post "/previous-slide" do
 end
 
 post "/edit-slide" do
-  Slide.find(params["id"]).edit(params).save
+  Slide.find(params["id"]).edit(params).save.to_hash.to_json
 end

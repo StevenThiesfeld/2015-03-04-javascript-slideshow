@@ -1,5 +1,4 @@
 var currentPosition = 0;
-var slide
 
 function nextSlide(){
   var formData = new FormData();
@@ -20,28 +19,29 @@ function previousSlide(){
 }
 
 function showForm(){
-  var form = document.createElement("FORM");
-  var title = document.createElement("INPUT");
-  title.setAttribute("type", "text");
-  var body = document.createElement("TEXTAREA");
-  var button = document.createElement("BUTTON");
-  button.innerHTML = "Submit Edit"
-  title.setAttribute("value", slide.title);
-  body.innerHTML = slide.body;
-  form.appendChild(title);
-  form.appendChild(body);
-  form.appendChild(button);
-  document.getElementById("editContainer").appendChild(form);
-  document.getElementById("showEditButton").setAttribute("class", "hide")
+  document.getElementById("editForm").setAttribute("class", "show");
+  document.getElementById("showEditButton").setAttribute("class", "hide");
+  document.getElementById("slideshow").setAttribute("class", "hide");
 }
 
 function editSlide(){ 
-  
+  var formElement = document.getElementById("editForm");
+  var request = new XMLHttpRequest;
+  request.open("post", "http://127.0.0.1:4567/edit-slide");
+  request.send(new FormData(formElement));
+  formElement.reset()
+  request.addEventListener("load", displaySlide, false); 
 }
 
 var displaySlide = function(event){
-   slide = JSON.parse(event.target.response);
+   var slide = JSON.parse(event.target.response);
    document.getElementById("title").innerHTML = slide.title;
    document.getElementById("body").innerHTML = slide.body; 
    currentPosition = slide.position;
+   document.getElementsByTagName("INPUT")[1].setAttribute("value", slide.title);
+   document.getElementsByTagName("TEXTAREA")[0].innerHTML = slide.body;
+   document.getElementById("slideId").setAttribute("value", slide.id)
+   document.getElementById("editForm").setAttribute("class", "hide");
+   document.getElementById("showEditButton").setAttribute("class", "show");
+   document.getElementById("slideshow").setAttribute("class", "show");
 }

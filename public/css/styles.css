@@ -9,7 +9,7 @@ h1{
   text-align:center;
 }
 
-.slideshow{
+#slideshow{
   width:600px;
   height:500px;
   margin:auto;
@@ -29,4 +29,27 @@ h1{
 
 .hide{
   display:none;
+}
+
+.editContainer{
+  text-align:center;
+}
+
+textarea{
+  display:inline-block;
+  text-align:center;
+}
+
+.show{
+  display:block;
+}
+
+form input{
+  display:inline-block;
+  font-size:24px;
+  text-align:center;  
+}
+#showEditButton{
+  margin-left:auto;
+  margin-right:auto;
 }
