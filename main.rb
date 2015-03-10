@@ -1,7 +1,7 @@
-require 'pry'
-require 'sinatra'
-require 'sqlite3'
-require 'json'
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default)
+
 DATABASE = SQLite3::Database.new("slideshow.db")
 require_relative "database-setup.rb"
 require_relative "models/slide.rb"
